@@ -13,6 +13,9 @@ const getSiteUrl = () => {
       networkAddress = parsedConfig?.proxy?.urls?.find(
         (addr: any) => addr.type === "network"
       )?.url;
+      if (networkAddress.endsWith("/")) {
+        networkAddress = networkAddress.slice(0, -1);
+      }
     }
 
     return networkAddress || "http://localhost:3000";
@@ -50,7 +53,7 @@ export default defineNuxtConfig({
     env: currentEnv,
     indexable: false, // Prevent search engines from indexing the site. Certificates are not something that should be indexed.
   },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/main.css", "~/assets/css/transitions.css"],
 
   compatibilityDate: "2024-07-29",
   modules: [
