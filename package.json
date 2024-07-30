@@ -11,9 +11,12 @@
   "devDependencies": {
     "@nuxt/devtools": "^1.0.3",
     "@nuxt/image": "^1.7.0",
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/seo": "^2.0.0-rc.16",
+    "@pinia/nuxt": "^0.5.2",
     "nuxt": "^3.8.2",
     "nuxt-mongoose": "^1.0.6",
+    "pinia": "^2.2.0",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5",
     "zod": "^3.23.8"

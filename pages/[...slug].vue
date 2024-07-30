@@ -1,3 +1,6 @@
+<template>
+  <p>Loading...</p>
+</template>
 <script setup lang="ts">
-navigateTo('https://http.cat/status/404', { external: true })
+navigateTo("https://http.cat/status/404", { external: true });
 </script>
