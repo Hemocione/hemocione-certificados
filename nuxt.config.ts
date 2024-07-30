@@ -13,7 +13,7 @@ const getSiteUrl = () => {
       networkAddress = parsedConfig?.proxy?.urls?.find(
         (addr: any) => addr.type === "network"
       )?.url;
-      if (networkAddress.endsWith("/")) {
+      if (networkAddress?.endsWith("/")) {
         networkAddress = networkAddress.slice(0, -1);
       }
     }
