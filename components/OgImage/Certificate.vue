@@ -33,14 +33,16 @@
       style="position: absolute; right: 0; height: 100%; width: 15%"
     />
     <img
-      src="/logos/vertical.svg"
+      src="/logos/principal.svg"
       alt="Logo Hemocione"
-      :height="150 * multiplier"
+      :width="200 * multiplier"
     />
     <h1 :style="{ fontSize: `${32 * multiplier}px`, maxWidth: '60%' }">
       {{ certificate.title }}
     </h1>
-    <span>Certificamos que</span>
+    <span :style="{ fontSize: `${16 * multiplier}px`, maxWidth: '60%' }"
+      >Certificamos que</span
+    >
     <h2 :style="{ fontSize: `${24 * multiplier}px`, maxWidth: '60%' }">
       {{ certificate.person?.name || "Você" }}
     </h2>

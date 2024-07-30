@@ -41,6 +41,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: siteUrl,
+      linkedinOrganizationId: 64875007,
     },
     currentEnv: currentEnv,
     secret: process.env.SECRET || "secret",

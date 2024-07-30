@@ -1,6 +1,5 @@
 <template>
   <div class="cert-page">
-    <NuxtImg src="/logos/principal.svg" alt="Logo Hemocione" width="200" />
     <div class="preview-wrapper">
       <TransitionGroup name="fade" appear>
         <img
@@ -16,14 +15,65 @@
           class="certificate loader-wrapper"
           key="loader"
         >
-          <LoaderBubbleDots size="4px" />
+          <LoaderSpinnerDots />
         </div>
       </TransitionGroup>
     </div>
     <div class="actions">
-      <button>Adicionar ao Linkedin</button>
-      <button>Compartilhar no WhatsApp</button>
-      <button>Imprimir Certificado</button>
+      <NuxtLink
+        style="display: flex; align-items: center; justify-content: center"
+        :to="certificateLinkedinUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        external
+      >
+        <NuxtImg
+          class="action-img"
+          src="/actions/linkedin.svg"
+          alt="Compartilhar no LinkedIn"
+          width="48"
+          height="48"
+        />
+      </NuxtLink>
+      <NuxtLink
+        style="display: flex; align-items: center; justify-content: center"
+        :to="certificateWhatsappUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        external
+      >
+        <NuxtImg
+          class="action-img"
+          src="/actions/whatsapp.svg"
+          alt="Compartilhar no WhatsApp"
+          width="48"
+          height="48"
+        />
+      </NuxtLink>
+      <NuxtImg
+        class="action-img"
+        src="/actions/pdf.svg"
+        alt="Baixar Certificado como PDF"
+        width="48"
+        height="48"
+        @click="downloadCertificatePdf"
+      />
+      <NuxtImg
+        class="action-img"
+        src="/actions/png.svg"
+        alt="Baixar Certificado como Image"
+        width="48"
+        height="48"
+        @click="downloadCertificatePng"
+      />
+      <NuxtImg
+        class="action-img printer"
+        src="/actions/printer.svg"
+        alt="Imprimir Certificado"
+        width="48"
+        height="48"
+        @click="printCertificate"
+      />
     </div>
   </div>
 </template>
@@ -41,8 +91,15 @@ if (!certificateId) {
 }
 
 let certificate: Certificate | null = null;
+let certificateLinkedinUrl = "";
+let certificateWhatsappUrl = "";
 try {
   certificate = await certificateStore.getCertificateById(certificateId);
+  if (!certificate) {
+    throw new Error("Certificate not found");
+  }
+  certificateLinkedinUrl = getCertificateLinkedinUrl(certificate);
+  certificateWhatsappUrl = getCertificateWhatsappShareUrl(certificate);
 } catch (error) {
   console.error(error);
   navigateTo("https://http.cat/status/404", { external: true });
@@ -62,24 +119,35 @@ defineOgImageComponent("Certificate", {
 const onPreviewLoad = () => {
   previewLoaded.value = true;
 };
+
+const downloadCertificatePdf = async () => {
+  console.log("Download PDF");
+};
+
+const downloadCertificatePng = async () => {
+  console.log("Download PNG");
+};
+
+const printCertificate = async () => {
+  console.log("Print");
+};
 </script>
 <style scoped>
 .cert-page {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  gap: 3rem;
+  gap: 2rem;
   padding: 1rem;
   box-sizing: border-box;
 }
 
 .preview-wrapper {
-  max-width: 90%;
+  max-width: 95%;
   max-height: 70%;
-  width: 100%;
   border-radius: 2rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
   aspect-ratio: 16/9;
@@ -95,9 +163,9 @@ const onPreviewLoad = () => {
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
-  max-width: 90%;
+  max-width: 95%;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
@@ -107,5 +175,33 @@ const onPreviewLoad = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: min(90dvw, 750px);
+}
+
+.action-img {
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.printer {
+  background-color: var(--black-100);
+  padding: 0.5rem;
+  display: flex;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 12px;
+  text-decoration: none;
+  transition: transform 0.2s;
+  max-width: 80px;
+  text-align: center;
 }
 </style>
