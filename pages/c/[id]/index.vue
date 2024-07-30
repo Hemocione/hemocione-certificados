@@ -31,8 +31,8 @@
           class="action-img"
           src="/actions/linkedin.svg"
           alt="Compartilhar no LinkedIn"
-          width="48"
-          height="48"
+          width="40"
+          height="40"
         />
       </NuxtLink>
       <NuxtLink
@@ -46,16 +46,16 @@
           class="action-img"
           src="/actions/whatsapp.svg"
           alt="Compartilhar no WhatsApp"
-          width="48"
-          height="48"
+          width="40"
+          height="40"
         />
       </NuxtLink>
       <NuxtImg
         class="action-img"
         src="/actions/pdf.svg"
         alt="Baixar Certificado como PDF"
-        width="48"
-        height="48"
+        width="40"
+        height="40"
         @click="printCertificate"
       />
       <a :href="certificateImageUrl" download="certificado.png" class="action">
@@ -63,16 +63,16 @@
           class="action-img"
           src="/actions/png.svg"
           alt="Baixar Certificado como Imagem"
-          width="48"
-          height="48"
+          width="40"
+          height="40"
         />
       </a>
       <NuxtImg
         class="action-img printer"
         src="/actions/printer.svg"
         alt="Imprimir Certificado"
-        width="48"
-        height="48"
+        width="40"
+        height="40"
         @click="printCertificate"
       />
     </div>
@@ -160,7 +160,7 @@ const printCertificate = async () => {
 
 .actions {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
   max-width: 95%;
   box-sizing: border-box;
