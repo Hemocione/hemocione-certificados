@@ -1,0 +1,36 @@
+meta {
+  name: Create Certificate
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{API_URL}}/v1/certificates
+  body: json
+  auth: none
+}
+
+headers {
+  x-secret: {{SECRET}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Certificado de Voluntariado",
+    "person": {
+      "hemocioneId": "12345",
+      "name": "Guima",
+      "document": "15273840716",
+      "email": "guima@hemocione.com.br",
+      "phone": "+5521984426717"
+    },
+    "text": "participou da organização do evento CSI 2024, dedicando um total de 10 horas.",
+    "private": false,
+    "emittedBy": {
+      "email": "guima@hemocione.com.br",
+      "name": "Guima",
+      "hemocioneId": "12345"
+    }
+  }
+}
