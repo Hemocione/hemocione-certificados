@@ -32,6 +32,19 @@
       alt="right-corner"
       style="position: absolute; right: 0; height: 100%; width: 15%"
     />
+    <QrCode
+      :value="cerficateUrl"
+      :size="100 * multiplier"
+      level="M"
+      :style="{
+        position: 'absolute',
+        bottom: `${25 * multiplier}px`,
+        left: `${25 * multiplier}px`,
+        padding: `${8 * multiplier}px`,
+        backgroundColor: '#FFF',
+        borderRadius: `${8 * multiplier}px`,
+      }"
+    />
     <img
       src="/logos/principal.svg"
       alt="Logo Hemocione"
@@ -80,6 +93,7 @@ const props = defineProps<{
   certificate: Certificate;
   multiplier?: number;
 }>(); // This is the certificate object that will be passed from the parent component
+const cerficateUrl = getCertificateUrl(props.certificate._id);
 const beautifulEmittionDate = new Date(
   props.certificate.emittedAt
 ).toLocaleDateString("pt-BR", {
