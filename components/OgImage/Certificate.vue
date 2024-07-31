@@ -74,11 +74,14 @@
         gap: `${String(8 * multiplier)}px`,
       }"
     >
-      <hr
+      <img
+        :src="signatureSrc"
+        :width="100 * multiplier"
+        alt="Assinatura"
         :style="{
-          height: '2px',
-          width: `${String(200 * multiplier)}px`,
-          backgroundColor: 'black',
+          'border-bottom': '1px solid black',
+          objectFit: 'contain',
+          boxSizing: 'border-box',
         }"
       />
       <span>Vitor Pinheiro</span>
@@ -101,6 +104,8 @@ const beautifulEmittionDate = new Date(
   month: "long",
   year: "numeric",
 });
+const config = useRuntimeConfig();
+const signatureSrc = config.public.signatureImageUrl;
 
 const multiplier = props.multiplier || 1;
 </script>
