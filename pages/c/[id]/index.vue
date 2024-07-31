@@ -84,7 +84,7 @@ import {
   type Certificate,
 } from "~/stores/certificateStore";
 const route = useRoute();
-const previewLoaded = ref(false);
+const previewLoaded = ref(true);
 const certificateStore = useCertificateStore();
 const certificateId = String(route.params.id);
 if (!certificateId) {
