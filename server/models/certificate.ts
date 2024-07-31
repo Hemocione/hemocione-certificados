@@ -9,7 +9,7 @@ const CertificateSchema = new Schema({
     },
     title: { type: String, required: true },
     person: {
-        hemocioneId: { type: String, required: true },
+        hemocioneId: { type: String, required: false },
         name: { type: String, required: true },
         document: { type: String, required: false },
         email: { type: String, required: true },

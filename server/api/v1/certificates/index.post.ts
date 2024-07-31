@@ -7,7 +7,7 @@ import getCertificateUrl from "~/utils/getCertificateUrl";
 const body = z.object({
   title: z.string(),
   person: z.object({
-    hemocioneId: z.string(),
+    hemocioneId: z.string().optional(),
     name: z.string(),
     document: z.string().optional(),
     email: z.string(),
