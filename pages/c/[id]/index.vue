@@ -84,7 +84,7 @@ import {
   type Certificate,
 } from "~/stores/certificateStore";
 const route = useRoute();
-const previewLoaded = ref(true);
+const previewLoaded = ref(false);
 const certificateStore = useCertificateStore();
 const certificateId = String(route.params.id);
 if (!certificateId) {
@@ -120,6 +120,12 @@ defineOgImageComponent("Certificate", {
 const onPreviewLoad = () => {
   previewLoaded.value = true;
 };
+
+onMounted(() => {
+  setTimeout(() => {
+    onPreviewLoad();
+  }, 3000); // wait, at most, 3 seconds for the image to load before showing the image
+});
 
 const printCertificate = async () => {
   print();
@@ -237,5 +243,4 @@ const printCertificate = async () => {
   size: A4 landscape;
   margin: 0;
 }
-
 </style>
