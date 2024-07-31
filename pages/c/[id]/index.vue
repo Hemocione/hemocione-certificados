@@ -31,8 +31,8 @@
           class="action-img"
           src="/actions/linkedin.svg"
           alt="Compartilhar no LinkedIn"
-          width="48"
-          height="48"
+          width="40"
+          height="40"
         />
       </NuxtLink>
       <NuxtLink
@@ -46,32 +46,33 @@
           class="action-img"
           src="/actions/whatsapp.svg"
           alt="Compartilhar no WhatsApp"
-          width="48"
-          height="48"
+          width="40"
+          height="40"
         />
       </NuxtLink>
       <NuxtImg
         class="action-img"
         src="/actions/pdf.svg"
         alt="Baixar Certificado como PDF"
-        width="48"
-        height="48"
-        @click="downloadCertificatePdf"
+        width="40"
+        height="40"
+        @click="printCertificate"
       />
-      <NuxtImg
-        class="action-img"
-        src="/actions/png.svg"
-        alt="Baixar Certificado como Image"
-        width="48"
-        height="48"
-        @click="downloadCertificatePng"
-      />
+      <a :href="certificateImageUrl" download="certificado.png" class="action">
+        <NuxtImg
+          class="action-img"
+          src="/actions/png.svg"
+          alt="Baixar Certificado como Imagem"
+          width="40"
+          height="40"
+        />
+      </a>
       <NuxtImg
         class="action-img printer"
         src="/actions/printer.svg"
         alt="Imprimir Certificado"
-        width="48"
-        height="48"
+        width="40"
+        height="40"
         @click="printCertificate"
       />
     </div>
@@ -83,7 +84,7 @@ import {
   type Certificate,
 } from "~/stores/certificateStore";
 const route = useRoute();
-const previewLoaded = ref(false);
+const previewLoaded = ref(true);
 const certificateStore = useCertificateStore();
 const certificateId = String(route.params.id);
 if (!certificateId) {
@@ -105,7 +106,7 @@ try {
   navigateTo("https://http.cat/status/404", { external: true });
 }
 
-const certificateImageUrl = getCertificatePreviewUrl(certificateId);
+const certificateImageUrl = getCertificatePrintUrl(certificateId);
 
 useServerSeoMeta({
   title: certificate?.title || "Seu Certificado",
@@ -120,16 +121,8 @@ const onPreviewLoad = () => {
   previewLoaded.value = true;
 };
 
-const downloadCertificatePdf = async () => {
-  console.log("Download PDF");
-};
-
-const downloadCertificatePng = async () => {
-  console.log("Download PNG");
-};
-
 const printCertificate = async () => {
-  console.log("Print");
+  print();
 };
 </script>
 <style scoped>
@@ -150,9 +143,13 @@ const printCertificate = async () => {
   max-height: 70%;
   border-radius: 2rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-  aspect-ratio: 16/9;
+  aspect-ratio: 100/70.707;
   object-fit: contain;
   box-sizing: border-box;
+}
+
+.preview-wrapper:last-child {
+  page-break-after: auto;
 }
 
 .certificate {
@@ -163,7 +160,7 @@ const printCertificate = async () => {
 
 .actions {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
   max-width: 95%;
   box-sizing: border-box;
@@ -204,4 +201,41 @@ const printCertificate = async () => {
   max-width: 80px;
   text-align: center;
 }
+
+@media print {
+  .actions {
+    display: none;
+  }
+
+  .cert-page {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    page-break-after: auto; /* Ensures no extra page break */
+  }
+
+  .preview-wrapper {
+    overflow: hidden;
+    aspect-ratio: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    page-break-after: auto; /* Ensures no extra page break */
+  }
+
+  .certificate {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    page-break-after: auto; /* Ensures no extra page break */
+  }
+}
+
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
 </style>

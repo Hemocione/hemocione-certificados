@@ -29,12 +29,12 @@ defineOgImageComponent(
   "Certificate",
   {
     certificate,
-    multiplier: 2,
+    multiplier: 2.5,
     fonts: ["Roboto:300", "Roboto:400", "Roboto:700"],
   },
   {
     width: 1920,
-    height: 1080,
+    height: 1358,
   }
 );
 </script>
