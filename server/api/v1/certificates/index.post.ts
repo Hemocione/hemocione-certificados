@@ -3,6 +3,7 @@ import { CertificateSchema } from "~/server/models/certificate";
 import { assertSecretAuth } from "~/server/services/auth";
 import { createCertificate } from "~/server/services/certificate";
 import getCertificateUrl from "~/utils/getCertificateUrl";
+import { sendCertificateEmail } from "~/server/services/mailing";
 
 const body = z.object({
   title: z.string(),
@@ -32,6 +33,6 @@ export default defineEventHandler(async (event) => {
 
   const certificateId = certificate._id;
   const url = getCertificateUrl(String(certificateId));
-
+  runAsync(sendCertificateEmail(certificate, url));
   return { certificate, url };
 });

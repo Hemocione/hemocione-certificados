@@ -44,6 +44,9 @@ export default defineNuxtConfig({
       linkedinOrganizationId: 64875007,
       signatureImageUrl: process.env.SIGNATURE_URL || "/utils/signature.svg",
     },
+    resend: {
+      apiKey: process.env.RESEND_API_KEY || "key",
+    },
     currentEnv: currentEnv,
     secret: process.env.SECRET || "secret",
   },
