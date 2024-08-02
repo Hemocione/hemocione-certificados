@@ -19,7 +19,7 @@ const body = z.object({
   emittedBy: z.object({
     email: z.string(),
     name: z.string(),
-    hemocioneId: z.string(),
+    hemocioneId: z.string().optional(),
   }),
 });
 
