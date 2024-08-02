@@ -67,6 +67,7 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "@pinia/nuxt",
     "@nuxtjs/google-fonts",
+    "nuxt-vercel-analytics",
   ],
   googleFonts: {
     families: {
