@@ -47,6 +47,7 @@ export default defineNuxtConfig({
     resend: {
       apiKey: process.env.RESEND_API_KEY || "key",
     },
+    mongodbUri: process.env.MONGODB_URI || "mongodb://localhost:27017/hemocione-certificados",
     currentEnv: currentEnv,
     secret: process.env.SECRET || "secret",
   },
@@ -62,7 +63,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2024-07-29",
   modules: [
-    "nuxt-mongoose",
     "@nuxt/image",
     "@nuxtjs/seo",
     "@pinia/nuxt",
@@ -73,12 +73,6 @@ export default defineNuxtConfig({
       Roboto: [100, 300, 400, 500, 700, 900],
     },
   },
-  mongoose: {
-    uri:
-      process.env.MONGODB_URI ||
-      "mongodb://localhost:27017/hemocione-certificados",
-  },
-
   experimental: {
     componentIslands: true,
   },
