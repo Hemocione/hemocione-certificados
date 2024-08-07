@@ -17,6 +17,7 @@
     "@vercel/functions": "^1.4.0",
     "mongoose": "^8.5.2",
     "nuxt": "^3.8.2",
+    "nuxt-bugsnag": "^7.3.0",
     "nuxt-vercel-analytics": "^1.0.2",
     "pinia": "^2.2.0",
     "qrcode.vue": "^3.4.1",

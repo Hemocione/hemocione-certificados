@@ -68,6 +68,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/google-fonts",
     "nuxt-vercel-analytics",
+    "nuxt-bugsnag"
   ],
   googleFonts: {
     families: {
@@ -76,5 +77,17 @@ export default defineNuxtConfig({
   },
   experimental: {
     componentIslands: true,
+  },
+
+  bugsnag: {
+    publishRelease: true,
+    disableLog: false, // might activate later
+    baseUrl: siteUrl,
+    config: {
+      apiKey: process.env.BUGSNAG_API_KEY,
+      enabledReleaseStages: ["prod", "dev"],
+      releaseStage: currentEnv,
+      appVersion: `${currentEnv}-${process.env.VERCEL_GIT_COMMIT_SHA}`,
+    },
   },
 });

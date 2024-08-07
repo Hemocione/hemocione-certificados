@@ -10,6 +10,7 @@ export default defineNitroPlugin(async (_nitro) => {
             console.log("Connected to MongoDB");
         } catch (error: any) {
             console.error("Failed to connect to MongoDB:", error);
+            useBugsnag().notify(error); // Notify Bugsnag about the error when connecting to MongoDB
             throw error;
         }
     }
