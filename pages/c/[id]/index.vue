@@ -26,6 +26,7 @@
         target="_blank"
         rel="noopener noreferrer"
         external
+        @click="() => captureActionClick('linkedin')"
       >
         <NuxtImg
           class="action-img"
@@ -41,6 +42,7 @@
         target="_blank"
         rel="noopener noreferrer"
         external
+        @click="() => captureActionClick('whatsapp')"
       >
         <NuxtImg
           class="action-img"
@@ -58,7 +60,12 @@
         height="40"
         @click="printCertificate"
       />
-      <a :href="certificateImageUrl" download="certificado.png" class="action">
+      <a
+        :href="certificateImageUrl"
+        download="certificado.png"
+        class="action"
+        @click="() => captureActionClick('png')"
+      >
         <NuxtImg
           class="action-img"
           src="/actions/png.svg"
@@ -73,7 +80,7 @@
         alt="Imprimir Certificado"
         width="40"
         height="40"
-        @click="printCertificate"
+        @click="getCertificatePdf"
       />
     </div>
   </div>
@@ -128,7 +135,20 @@ onMounted(() => {
 });
 
 const printCertificate = async () => {
+  captureActionClick("print");
   print();
+};
+
+const getCertificatePdf = () => {
+  captureActionClick("pdf");
+  print();
+};
+
+const captureActionClick = (action: string) => {
+  vercelTrack("Certificate Action Click", {
+    certificateId,
+    action,
+  });
 };
 </script>
 <style scoped>
